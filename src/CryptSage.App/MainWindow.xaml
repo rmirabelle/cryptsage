@@ -1,0 +1,134 @@
+<ui:FluentWindow x:Class="CryptSage.App.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 Title="Crypt Sage"
+                 Width="560" Height="420"
+                 MinWidth="400" MinHeight="300"
+                 WindowStartupLocation="CenterScreen"
+                 ExtendsContentIntoTitleBar="True"
+                 WindowBackdropType="Mica"
+                 Icon="pack://application:,,,/AppIcon.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ui:TitleBar Grid.Row="0" Title="Crypt Sage">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon Source="pack://application:,,,/AppIcon.ico" />
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Menu x:Name="MainMenu"
+                  Grid.Row="0"
+                  Background="Transparent">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Mount Drive…" Click="OnMountClick" />
+                    <MenuItem Header="_New Volume…" Click="OnCreateClick" />
+                    <MenuItem Header="_Dismount All" Click="OnDismountAllClick" />
+                    <Separator />
+                    <MenuItem Header="E_xit" Click="OnExitClick" />
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_About Crypt Sage" Click="OnAboutClick" />
+                </MenuItem>
+            </Menu>
+
+            <Border x:Name="UpdateBar"
+                    Grid.Row="1"
+                    Margin="16,8,16,0"
+                    Padding="12,6"
+                    CornerRadius="4"
+                    Background="#22FFFFFF"
+                    Visibility="Collapsed">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="UpdateText"
+                               VerticalAlignment="Center"
+                               TextTrimming="CharacterEllipsis" />
+                    <ui:Button x:Name="UpdateButton"
+                               Grid.Column="1"
+                               Content="Update"
+                               Appearance="Primary"
+                               Click="OnAboutClick" />
+                </Grid>
+            </Border>
+
+            <StackPanel Grid.Row="2"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <ui:Button x:Name="MountButton"
+                           Padding="24,12"
+                           FontSize="28"
+                           FontWeight="SemiBold"
+                           Background="#744DA9"
+                           Foreground="White"
+                           BorderBrush="#8A65BE"
+                           Click="OnMountClick">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/MountIcon.png"
+                               Width="96" Height="96"
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               Margin="0,0,16,0"
+                               VerticalAlignment="Center" />
+                        <TextBlock Text="Mount Drive"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                </ui:Button>
+
+                <StackPanel x:Name="BusyPanel"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0,24,0,0"
+                            Visibility="Collapsed">
+                    <ui:ProgressRing Width="16" Height="16"
+                                     IsIndeterminate="True"
+                                     VerticalAlignment="Center" />
+                    <TextBlock x:Name="BusyText"
+                               FontSize="13"
+                               Opacity="0.7"
+                               Margin="8,0,0,0"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3"
+                        Margin="16,0,16,12">
+                <ScrollViewer MaxHeight="190"
+                              VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="MountBars" />
+                </ScrollViewer>
+                <ui:InfoBar x:Name="StatusBar"
+                            IsOpen="False"
+                            IsClosable="True" />
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,16">
+            <ui:HyperlinkButton x:Name="CreateLink"
+                                Content="New Volume"
+                                Click="OnCreateClick" />
+            <TextBlock Text=" · " Opacity="0.4" VerticalAlignment="Center" />
+            <ui:HyperlinkButton x:Name="DismountAllLink"
+                                Content="Dismount All"
+                                Click="OnDismountAllClick" />
+        </StackPanel>
+    </Grid>
+</ui:FluentWindow>

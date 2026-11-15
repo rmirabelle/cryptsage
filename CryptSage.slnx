@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CryptSage.App/CryptSage.App.csproj" />
+    <Project Path="src/CryptSage.Core/CryptSage.Core.csproj" />
+  </Folder>
+</Solution>
