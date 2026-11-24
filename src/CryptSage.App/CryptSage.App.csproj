@@ -18,12 +18,21 @@
     <ApplicationIcon>AppIcon.ico</ApplicationIcon>
     <RootNamespace>CryptSage.App</RootNamespace>
     <!-- The one source of the version: the updater compares it and publish.ps1 reads it. -->
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <Resource Include="AppIcon.ico" />
     <Resource Include="MountIcon.png" />
+  </ItemGroup>
+
+  <!--
+    Crypt Sage needs no pen input. Without this switch, WPF loads PenImc_cor3.dll on each
+    Windows device-change message, and that load fails in the single-file build.
+    Touch taps still work as mouse clicks.
+  -->
+  <ItemGroup>
+    <RuntimeHostConfigurationOption Include="Switch.System.Windows.Input.Stylus.DisableStylusAndTouchSupport" Value="true" />
   </ItemGroup>
 
 </Project>

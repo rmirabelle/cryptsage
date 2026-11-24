@@ -50,8 +50,8 @@ public partial class App : Application
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(logPath)!);
-            File.WriteAllText(logPath,
-                $"[{DateTime.Now:O}]{Environment.NewLine}{ex}{Environment.NewLine}");
+            File.AppendAllText(logPath,
+                $"[{DateTime.Now:O}]{Environment.NewLine}{ex}{Environment.NewLine}{Environment.NewLine}");
         }
         catch { /* best-effort */ }
 
